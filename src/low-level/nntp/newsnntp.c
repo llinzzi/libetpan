@@ -109,6 +109,9 @@ newsnntp * newsnntp_new(size_t progr_rate, progress_function * progr_fun)
 
 	f->nntp_timeout = 0;
 
+  f->nntp_logger = NULL;
+  f->nntp_logger_context = NULL;
+
   return f;
 
  free_stream_buffer:
@@ -924,7 +927,7 @@ int newsnntp_list_distribution(newsnntp * f, clist ** result)
   int r;
   char * response;
 
-  snprintf(command, NNTP_STRING_SIZE, "LIST DISTRIBUTION\r\n");
+  snprintf(command, NNTP_STRING_SIZE, "LIST DISTRIBUTIONS\r\n");
   r = send_command(f, command);
   if (r == -1)
     return NEWSNNTP_ERROR_STREAM;
